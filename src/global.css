@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&display=swap');
+
+:root {
+    /* Neutral Colors */
+    --dark: #151b25;
+    --gray: #131720;
+    --light: #fafafa;
+    --one: #0a0a0a;
+    --two: #171717;
+    --three: #262626;
+    --four: #404040;
+    --five: #525252;
+    --six: #737373;
+    --seven: #a3a3a3;
+    --eight: #d4d4d4;
+    --nine: #e5e5e5;
+    --ten: #f5f5f5;
+  
+    /* Slate Colors */
+    --slateOne: #020617;
+    --slateTwo: #0f172a;
+    --slateThree: #1e293b;
+    --slateFour: #334155;
+    --slateFive: #475569;
+    --slateSix: #64748b;
+    --slateSeven: #94a3b8;
+    --slateEight: #cbd5e1;
+    --slateNine: #e2e8f0;
+    --slateTen: #f1f5f9;
+  
+    /* Colors */
+    --blue: #2c6c96;
+    --yellow: #ffa800;
+    --green: #10b710;
+    --red: #F55557;
+    --orange: #ff6400;
+    --grayMicrosoft: #2c2c2e;
+    
+    /* Fonts */
+    --font: 'Poppins', sans-serif !important;
+}
+
+* {
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: var(--font);
+  letter-spacing: 0.1px;
+}
+
+html, body {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--one); /* Cor de fundo ao selecionar texto */
+  color:var(--light); /* Cor do texto selecionado */
+} ::-webkit-scrollbar {
+  width: 12px;
+} ::-webkit-scrollbar-thumb {
+  background-color: transparent;
+} 
+
+/* Para Firefox */
+* {
+  scrollbar-color: transparent transparent;
+} *::-moz-scrollbar {
+  width: 12px;
+} *::-moz-scrollbar-thumb {
+  background-color: transparent;
+} #webpack-dev-server-client-overlay-div, #webpack-dev-server-client-overlay {
+  /*display: none !important;*/
+  color: #fff;
+}

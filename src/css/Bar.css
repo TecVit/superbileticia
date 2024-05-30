@@ -1,0 +1,93 @@
+.container-bar {
+    width: 100%;
+    height: auto;
+    background: var(--slateOne);
+    color: var(--slateNine);
+}
+
+.content-bar {
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0px auto;
+    text-align: center;
+    padding: 30px 0px;
+}
+
+.content-bar h1 {
+    font-size: 26px;
+    font-weight: 900;
+}
+
+.content-bar h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 8px 0px;
+}
+
+.content-bar p {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+} .content-bar p strong {
+    color: var(--blue);
+}
+
+.content-bar .canva {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px auto;
+}
+
+/* NAVBAR */
+.content-bar .navbar {
+    width: 95%;
+    max-width: 700px;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin: 27.5px 0px 32.5px 0px;
+}
+
+
+.content-bar .navbar select {
+    width: max-content;
+    height: max-content;
+    padding: 12.5px;
+    background: var(--slateTwo);
+    box-shadow: 0px 0px 1px var(--slateNine);
+    color: var(--slateNine);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.content-bar .navbar a {
+    width: max-content;
+    height: max-content;
+    padding: 12.5px 17.5px;
+    background: var(--slateTwo);
+    box-shadow: 0px 0px 1px var(--slateNine);
+    color: var(--slateNine);
+    border-radius: 8px;
+    margin: 0px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    border: 2px solid transparent;
+} .content-bar .navbar a:hover {
+    box-shadow: 0px 0px 10px var(--slateNine);
+} .content-bar .navbar a.selecionado {
+    border: 2px solid var(--slateNine);
+    box-shadow: 0px 0px 10px var(--slateNine);
+}

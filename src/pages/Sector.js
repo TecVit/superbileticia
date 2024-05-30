@@ -1,0 +1,29 @@
+import '../css/Sector.css';
+import BarChart from '../charts/BarChart';
+import { useState } from 'react';
+import SectorChart from '../charts/SectorChart';
+
+const Sector = () => {
+
+  const [ensino, setEnsino] = useState('medio');
+
+  return (
+    <main className="container-sector">
+      <section className='content-sector'>
+        <h1> Super BI Letícia | Sector </h1>
+        <p>Made by <strong>TecVit</strong></p>
+        <nav className='navbar'>
+          <select defaultValue={ensino} onChange={(e) => {
+            setEnsino(e.target.value)
+          }}>
+            <option value="fundamental">Ensino Fundamental</option>
+            <option value="medio">Ensino Médio</option>
+          </select>
+        </nav>
+        <SectorChart ensino={ensino} />
+      </section>
+    </main>
+  );
+}
+
+export default Sector;
