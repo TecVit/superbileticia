@@ -13,14 +13,14 @@ const Sector = () => {
         <h1> Super BI Letícia | Sector </h1>
         <p>Made by <strong>TecVit</strong></p>
         <nav className='navbar'>
-          <select defaultValue={ensino} onChange={(e) => {
+          <select value={ensino} onChange={(e) => {
             setEnsino(e.target.value)
           }}>
             <option value="fundamental">Ensino Fundamental</option>
             <option value="medio">Ensino Médio</option>
           </select>
         </nav>
-        <SectorChart ensino={ensino} />
+        <SectorChart key={ensino} ensino={ensino} />
       </section>
     </main>
   );

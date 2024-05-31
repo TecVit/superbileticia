@@ -13,7 +13,7 @@ const Bar = () => {
         <h1> Super BI Letícia | Bar </h1>
         <p>Made by <strong>TecVit</strong></p>
         <nav className='navbar'>
-          <select defaultValue={ensino} onChange={(e) => {
+          <select value={ensino} onChange={(e) => {
             setSerie(e.target.value === 'medio' ? '1ºA' : '6ºA'); 
             setEnsino(e.target.value)
           }}>
@@ -46,7 +46,7 @@ const Bar = () => {
             <></>
           )}
         </nav>
-        <BarChart serie={serie} />
+        <BarChart key={serie} serie={serie} />
       </section>
     </main>
   );

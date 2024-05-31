@@ -25,16 +25,25 @@ const PieChart = ({ ensino }) => {
   ];
 
   const consultarDadosDaSerie = async (seriesList) => {
-    var dados = [];
+    var dados = {};
+    var datasList = [];
     try {
-      const resposta = Promise.all(seriesList.map( async (serie) => {
+      const resposta = await Promise.all(seriesList.map( async (serie) => {
         const objSerie = await getDataSerie(serie); // Retorna um { OBJETO }
-        dados.push(objSerie);
+        dados[serie] = objSerie;
       }));
 
       if (resposta) {
-        console.log(dados);
-        return dados;
+        await Object.keys(dados).map((serie) => {
+          let soma = 0;
+          const objSerie = dados[serie];
+          Object.values(objSerie).map((val) => {
+            soma += val;
+          })
+          const media = soma / Object.values(objSerie).length;
+          datasList.push(media);
+        });
+        setDatas(datasList)
       }
     } catch (error) {
       console.log(error);
