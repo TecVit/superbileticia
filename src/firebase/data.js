@@ -47,7 +47,6 @@ const getColorsPlataforms = async () => {
             });
         } else {
             console.log('Documento não encontrado!');
-            return false;
         }
     } catch (error) {
         console.log('Erro ao buscar cores:', error);
@@ -69,7 +68,6 @@ const getDataSerie = async (serie) => {
             });
         } else {
             console.log('Documento não encontrado!');
-            return false;
         }
     } catch (error) {
         console.log('Erro ao buscar cores:', error);

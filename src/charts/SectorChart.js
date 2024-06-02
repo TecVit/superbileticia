@@ -30,15 +30,16 @@ const PieChart = ({ ensino }) => {
     try {
       const resposta = await Promise.all(seriesList.map( async (serie) => {
         const objSerie = await getDataSerie(serie); // Retorna um { OBJETO }
-        dados[serie] = objSerie;
+        dados[serie] = await objSerie;
+        return true;
       }));
 
       if (resposta) {
-        await Object.keys(dados).map((serie) => {
+        await Object.keys(dados).map( async (serie) => {
           let soma = 0;
           const objSerie = dados[serie];
-          Object.values(objSerie).map((val) => {
-            soma += val;
+          await Object.values(objSerie).map((val) => {
+            soma += Number(val);
           })
           const media = soma / Object.values(objSerie).length;
           datasList.push(media);
