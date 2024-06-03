@@ -90,4 +90,12 @@
 } .content-bar .navbar a.selecionado {
     border: 2px solid var(--slateNine);
     box-shadow: 0px 0px 10px var(--slateNine);
+} .content-bar .navbar a.on {
+    background: var(--green);
+    border: 2px solid var(--slateNine);
+    box-shadow: 0px 0px 10px var(--slateNine);
+} .content-bar .navbar a.off {
+    background: var(--red);
+    border: 2px solid var(--slateNine);
+    box-shadow: 0px 0px 10px var(--slateNine);
 }

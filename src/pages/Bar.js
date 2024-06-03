@@ -1,11 +1,51 @@
 import '../css/Bar.css';
 import BarChart from '../charts/BarChart';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Bar = () => {
 
   const [ensino, setEnsino] = useState('medio');
+  const [statusSlide, setStatusSlide] = useState(false);
+  const [slideIndex, setSlideIndex] = useState(0);
   const [serie, setSerie] = useState('1ºA');
+
+  const seriesMedio = [
+    '1ºA',
+    '1ºB',
+    '2ºA',
+    '2ºB',
+    '3ºA',
+    '3ºB',
+    '3ºC',
+  ];
+
+  const seriesFundamental = [
+    '6ºA',
+    '6ºB',
+    '6ºC',
+    '7ºA',
+    '7ºB',
+    '8ºA',
+    '8ºB',
+    '9ºA',
+    '9ºB',
+  ];
+  
+  useEffect(() => {
+    if (statusSlide) {
+      let series = ensino === 'medio' ? seriesMedio : seriesFundamental;
+      setSlideIndex(0);
+      const interval = setInterval(() => {
+        setSlideIndex((prevIndex) => {
+          const newIndex = (prevIndex + 1) % series.length;
+          setSerie(series[newIndex]);
+          return newIndex;
+        });
+      }, 5000);
+
+      return () => clearInterval(interval);
+    }
+  }, [statusSlide, ensino]);
 
   return (
     <main className="container-bar">
@@ -45,6 +85,7 @@ const Bar = () => {
           ) : (
             <></>
           )}
+            <a className={statusSlide ? 'on' : 'off'} onClick={() => setStatusSlide(!statusSlide)}>Slide {statusSlide ? 'on' : 'off'}</a>
         </nav>
         <BarChart key={serie} serie={serie} />
       </section>
