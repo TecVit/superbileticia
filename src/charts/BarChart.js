@@ -78,7 +78,7 @@ const BarChart = ({serie}) => {
   }, [getDataLoaded, serie]);
 
   return (
-    <div className='canva' style={{ width: '95%', height: '500px', margin: '0px auto' }}>
+    <div className='canva'>
       <canvas ref={chartRef} />
     </div>
   );

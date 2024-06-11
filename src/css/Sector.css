@@ -38,10 +38,18 @@
 }
 
 .content-sector .canva {
+    width: 90%;
+    max-width: 350px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0px auto;
+    margin: 15px auto;
+}
+
+.content-sector .canva canva {
+    width: auto;
+    max-height: 500px !important;
 }
 
 /* NAVBAR */
