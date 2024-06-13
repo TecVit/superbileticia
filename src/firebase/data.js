@@ -24,6 +24,16 @@ var plataformsExists = [
     'matific',
 ];
 
+const plataformsText = [
+    'Aluno Presente',
+    'Alura',
+    'Khan Academy',
+    'Leia SP',
+    'Redação SP',
+    'Tarefas SP',
+    'Matific',
+];
+
 var minhaTurma = {
     alura: 7.5,
     redacaoSP: 45,
@@ -56,14 +66,20 @@ const getColorsPlataforms = async () => {
 }
 
 const getDataSerie = async (serie) => {
-    const datas = {};
+    const datasGet = {};
+    const plataformsGet = [];
     try {
         const dataRef = await db.collection('series').doc(serie).get();
         if (dataRef.exists) {
             const data = dataRef.data();
-            plataformsExists.forEach((plataforma) => {
+            plataformsExists.forEach((plataforma, index) => {
                 if (data[plataforma]) {
-                    datas[plataforma] = data[plataforma];
+                    const vencedor = data.vencedor;
+                    if (vencedor) {
+                        localStorage.setItem('vencedor', serie);
+                    }
+                    datasGet[plataformsText[index]] = data[plataforma];
+                    plataformsGet.push(plataformsText[index]);
                 }
             });
         } else {
@@ -73,7 +89,7 @@ const getDataSerie = async (serie) => {
         console.log('Erro ao buscar cores:', error);
         return false;
     }
-    return datas;
+    return { datasGet, plataformsGet };
 }
 
 const getSeries = async () => {

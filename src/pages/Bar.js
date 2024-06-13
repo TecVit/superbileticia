@@ -1,9 +1,11 @@
 import '../css/Bar.css';
 import BarChart from '../charts/BarChart';
+import Confetti from '../charts/Confetti';
 import { useEffect, useState } from 'react';
 
 const Bar = () => {
 
+  const vencedor = localStorage.getItem('vencedor') || null;
   const [ensino, setEnsino] = useState('medio');
   const [statusSlide, setStatusSlide] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
@@ -50,7 +52,7 @@ const Bar = () => {
   return (
     <main className="container-bar">
       <section className='content-bar'>
-        <h1> Super BI Letícia | Bar </h1>
+        <h1> Super BI Letícia | Bar Graph </h1>
         <p>Made by <strong>TecVit</strong></p>
         <nav className='navbar'>
           <select value={ensino} onChange={(e) => {
@@ -88,6 +90,11 @@ const Bar = () => {
             <a className={statusSlide ? 'on' : 'off'} onClick={() => setStatusSlide(!statusSlide)}>Slide {statusSlide ? 'on' : 'off'}</a>
         </nav>
         <BarChart key={serie} serie={serie} />
+        {vencedor === serie ? (
+          <Confetti />
+        ) : (
+          <></>
+        )}
       </section>
     </main>
   );

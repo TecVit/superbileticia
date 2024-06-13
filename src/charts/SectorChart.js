@@ -26,25 +26,42 @@ const PieChart = ({ ensino }) => {
 
   const consultarDadosDaSerie = async (seriesList) => {
     var dados = {};
+    var seriesOrdenadas = {};
     var datasList = [];
+    var seriesText = [];
     try {
       const resposta = await Promise.all(seriesList.map( async (serie) => {
-        const objSerie = await getDataSerie(serie); // Retorna um { OBJETO }
-        dados[serie] = await objSerie;
+        const { datasGet, plataformsGet } = await getDataSerie(serie); // Retorna um { OBJETO }
+        dados[serie] = await datasGet;
         return true;
       }));
 
       if (resposta) {
-        await Object.keys(dados).map( async (serie) => {
+        await Promise.all(Object.keys(dados).map( async (serie) => {
           let soma = 0;
-          const objSerie = dados[serie];
-          await Object.values(objSerie).map((val) => {
+          const  datasGet = dados[serie];
+          Object.values(datasGet).map((val) => {
             soma += Number(val);
           })
-          const media = soma / Object.values(objSerie).length;
+          const media = (soma / Object.values(datasGet).length);
+          seriesOrdenadas[serie] = media;
           datasList.push(media);
+        }));
+
+        datasList.sort();
+        
+        let seriesOrdenadasDescrecente = Object.fromEntries(Object.entries(seriesOrdenadas).sort((a, b) => b[1] - a[1]));
+
+        await Object.keys(seriesOrdenadasDescrecente).map( async (serie) => {
+          const valorSerie = seriesOrdenadas[serie]; 
+          if (valorSerie === datasList[0]) {
+            localStorage.setItem('vencedor', serie);
+          }
+          seriesText.push(serie);
         });
-        setDatas(datasList)
+
+        setSeries(seriesText);
+        setDatas(datasList);
       }
     } catch (error) {
       console.log(error);

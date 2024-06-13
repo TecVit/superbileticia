@@ -9,16 +9,26 @@ const BarChart = ({serie}) => {
 
   const plataformsLocal = localStorage.getItem('plataforms') ? JSON.parse(localStorage.getItem('plataforms')) : null;
   const colorsLocal = localStorage.getItem('colors') ? JSON.parse(localStorage.getItem('colors')) : null;
-  const [plataforms, setPlataforms] = useState(plataformsLocal ? plataformsLocal : []);
+  const [plataforms, setPlataforms] = useState([]);
+  /*const plataformsText = [
+    'Aluno Presente',
+    'Alura',
+    'Khan Academy',
+    'Leia SP',
+    'Redação SP',
+    'Tarefas SP',
+    'Matific',
+  ];*/
   const [colors, setColors] = useState(colorsLocal ? colorsLocal : []);
   const [datas, setDatas] = useState([1, 1, 1, 1, 1, 1, 1]);
   const [getDataLoaded, setGetDataLoaded] = useState(false);
-
+  
   useEffect(() => {
     const readindData = async () => {
       try {
-        const datasGet = await getDataSerie(serie);
+        const { datasGet, plataformsGet } = await getDataSerie(serie);
         setDatas(datasGet);
+        setPlataforms(plataformsGet);
         setGetDataLoaded(true);
       } catch (error) {
         console.log(error);

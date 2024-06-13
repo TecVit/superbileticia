@@ -10,7 +10,7 @@ const Sector = () => {
   return (
     <main className="container-sector">
       <section className='content-sector'>
-        <h1> Super BI Letícia | Sector </h1>
+        <h1> Super BI Letícia | Sector Graph </h1>
         <p>Made by <strong>TecVit</strong></p>
         <nav className='navbar'>
           <select value={ensino} onChange={(e) => {
