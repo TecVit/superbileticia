@@ -49,6 +49,21 @@ const Bar = () => {
     }
   }, [statusSlide, ensino]);
 
+  const [rankingSerie, setRankingSerie] = useState(0);
+
+  useEffect(() => {
+    const ranking = JSON.parse(localStorage.getItem('ranking')) || null;
+    if (ranking) {
+      ranking.sort((a, b) => b[1] - a[1]);
+      ranking.map((rankin, index) => {
+        if (rankin[0] === serie) {
+          setRankingSerie(index + 1);
+        }
+      })
+    }
+  }, [statusSlide, ensino, serie]);
+
+
   return (
     <main className="container-bar">
       <section className='content-bar'>
@@ -89,6 +104,13 @@ const Bar = () => {
           )}
             <a className={statusSlide ? 'on' : 'off'} onClick={() => setStatusSlide(!statusSlide)}>Slide {statusSlide ? 'on' : 'off'}</a>
         </nav>
+        {rankingSerie != 0 ? (
+          <h3 className='ranking'>
+            <strong>{rankingSerie}º Lugar</strong> no Ranking do {ensino === 'medio' ? 'Ensino Médio' : 'Ensino Fundamental'}
+          </h3>
+        ) : (
+          <></>
+        )}
         <BarChart key={serie} serie={serie} />
         {vencedor === serie ? (
           <Confetti />

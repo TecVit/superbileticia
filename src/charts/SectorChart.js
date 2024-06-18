@@ -48,17 +48,23 @@ const PieChart = ({ ensino }) => {
           datasList.push(media);
         }));
 
-        datasList.sort();
+        await datasList.sort();
         
-        let seriesOrdenadasDescrecente = Object.fromEntries(Object.entries(seriesOrdenadas).sort((a, b) => b[1] - a[1]));
+        let arraySeriesOrdenadasDescrecente = await Object.entries(seriesOrdenadas);
+        await localStorage.setItem('ranking', JSON.stringify(arraySeriesOrdenadasDescrecente));
+        await arraySeriesOrdenadasDescrecente.sort((a, b) => b[1] - a[1]);
+        
+        let seriesOrdenadasDescrecente = await Object.fromEntries(arraySeriesOrdenadasDescrecente);
 
         await Object.keys(seriesOrdenadasDescrecente).map( async (serie) => {
           const valorSerie = seriesOrdenadas[serie]; 
-          if (valorSerie === datasList[0]) {
+          if (valorSerie === datasList[datasList.length - 1]) {
             localStorage.setItem('vencedor', serie);
           }
           seriesText.push(serie);
         });
+
+        await seriesText.reverse();
 
         setSeries(seriesText);
         setDatas(datasList);
