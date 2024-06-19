@@ -63,6 +63,19 @@ const Bar = () => {
     }
   }, [statusSlide, ensino, serie]);
 
+   useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const ensinoParam = params.get('ensino');
+
+    if (ensinoParam === 'medio') {
+      setEnsino('medio');  
+      console.log('Ensino médio selecionado');
+    } else if (ensinoParam === 'fundamental') {
+      setEnsino('fundamental');
+      console.log('Ensino fundamental selecionado');
+    }
+  }, [location.search]);
+
 
   return (
     <main className="container-bar">
