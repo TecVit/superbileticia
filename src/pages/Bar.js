@@ -71,10 +71,12 @@ const Bar = () => {
     const ensinoParam = params.get('ensino');
 
     if (ensinoParam === 'medio') {
-      setEnsino('medio');  
+      setEnsino('medio');
+      setSerie('1ºA');
       console.log('Ensino médio selecionado');
     } else if (ensinoParam === 'fundamental') {
       setEnsino('fundamental');
+      setSerie('6ºA');
       console.log('Ensino fundamental selecionado');
     }
   }, [location.search]);
