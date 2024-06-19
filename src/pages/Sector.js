@@ -12,7 +12,7 @@ const Sector = () => {
   
    useEffect(() => {
     const params = new URLSearchParams(location.search);
-    const ensinoParam = params.get('ensino');
+    const ensinoParam = params.get('e');
 
     if (ensinoParam === 'em') {
       setEnsino('medio');
