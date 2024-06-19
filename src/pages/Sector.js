@@ -1,6 +1,6 @@
 import '../css/Sector.css';
 import BarChart from '../charts/BarChart';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SectorChart from '../charts/SectorChart';
 import { useLocation } from 'react-router-dom';
 
