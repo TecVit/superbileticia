@@ -2,10 +2,26 @@ import '../css/Sector.css';
 import BarChart from '../charts/BarChart';
 import { useState } from 'react';
 import SectorChart from '../charts/SectorChart';
+import { useLocation } from 'react-router-dom';
 
 const Sector = () => {
 
   const [ensino, setEnsino] = useState('medio');
+
+  const location = useLocation();
+  
+   useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const ensinoParam = params.get('ensino');
+
+    if (ensinoParam === 'em') {
+      setEnsino('medio');
+      console.log('Ensino médio selecionado');
+    } else if (ensinoParam === 'ef') {
+      setEnsino('fundamental');
+      console.log('Ensino fundamental selecionado');
+    }
+  }, [location.search]);
 
   return (
     <main className="container-sector">
