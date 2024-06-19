@@ -2,6 +2,7 @@ import '../css/Bar.css';
 import BarChart from '../charts/BarChart';
 import Confetti from '../charts/Confetti';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Bar = () => {
 
@@ -63,6 +64,8 @@ const Bar = () => {
     }
   }, [statusSlide, ensino, serie]);
 
+  const location = useLocation();
+  
    useEffect(() => {
     const params = new URLSearchParams(location.search);
     const ensinoParam = params.get('ensino');
