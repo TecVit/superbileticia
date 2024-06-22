@@ -23,10 +23,15 @@ const Sector = () => {
     }
   }, [location.search]);
 
+  const ultimaAtualizacao = localStorage.getItem('ultimaAtualizacao') || false;
+
   return (
     <main className="container-sector">
       <section className='content-sector'>
         <h1> Super BI Letícia | Sector Graph </h1>
+        {ultimaAtualizacao && (
+          <a className='ultimaAtualizacao'><strong>Semana:</strong> {ultimaAtualizacao}</a>
+        )}
         <p>Made by <strong>TecVit</strong></p>
         <nav className='navbar'>
           <select value={ensino} onChange={(e) => {

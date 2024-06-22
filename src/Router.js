@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { getColorsPlataforms, getSeries } from './firebase/data';
+import { getColorsPlataforms, getLastUpdate, getSeries } from './firebase/data';
 
 /* PÁGINA INICIAL */
 import Home from './pages/Home';
@@ -10,9 +10,11 @@ import Erro404 from './pages/Erro404';
 
 const RouterApp = () => {
 
-    const returnPlataformsAndColors = async () => {
+    const returnDataInfo = async () => {
         var plataformsArray = [];
         var colorsArray = [];
+        const ultimaAtualizacao = await getLastUpdate() || false;
+        localStorage.setItem('ultimaAtualizacao', ultimaAtualizacao);
         const plataformsGet = await getColorsPlataforms() || false;
         if (!plataformsGet) {
             plataformsArray = [
@@ -51,7 +53,7 @@ const RouterApp = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const { plataformsArray, colorsArray } = await returnPlataformsAndColors();
+                const { plataformsArray, colorsArray } = await returnDataInfo();
                 const seriesArray = await getSeries();
                 if (!seriesArray) {
                     return;

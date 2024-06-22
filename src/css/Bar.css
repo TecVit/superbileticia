@@ -26,15 +26,26 @@
 .content-bar h2 {
     font-size: 16px;
     font-weight: 700;
-    margin: 8px 0px;
+    margin: 10px 0px;
 }
 
 .content-bar p {
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.3px;
+    margin: 0px 0px -5px 0px;
 } .content-bar p strong {
     color: var(--blue);
+}
+
+.content-bar a {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    margin: 7.5px 0px;
+} .content-bar a strong {
+    font-size: 15px;
+    font-weight: 700;
 }
 
 .content-bar .ranking {

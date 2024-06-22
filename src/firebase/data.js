@@ -65,6 +65,21 @@ const getColorsPlataforms = async () => {
     return cores;
 }
 
+const getLastUpdate = async () => {
+    try {
+        const dataRef = await db.collection('dados').doc('atualizacao').get();
+        if (dataRef.exists) {
+            const data = dataRef.data();
+            return `${data.inicio} - ${data.fim}`;
+        } else {
+            console.log('Documento não encontrado!');
+        }
+    } catch (error) {
+        console.log('Erro ao buscar cores:', error);
+        return false;
+    }
+}
+
 const getDataSerie = async (serie) => {
     const datasGet = {};
     const plataformsGet = [];
@@ -112,4 +127,4 @@ const getSeries = async () => {
     return series;
 }
 
-export { getColorsPlataforms, getDataSerie, getSeries }
+export { getColorsPlataforms, getDataSerie, getSeries, getLastUpdate }
