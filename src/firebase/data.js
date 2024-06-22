@@ -127,4 +127,79 @@ const getSeries = async () => {
     return series;
 }
 
-export { getColorsPlataforms, getDataSerie, getSeries, getLastUpdate }
+
+const seriesLocal = localStorage.getItem('series') ? JSON.parse(localStorage.getItem('series')) : [];
+  
+const setRankingEnsino = async (ensino) => {
+    var seriesList = [];
+    try {
+        if (ensino === 'medio') {
+            seriesLocal.map((serie) => {
+            if (serie.includes('1') || serie.includes('2') || serie.includes('3')) {
+                seriesList.push(serie);
+            }
+            });
+        } else if (ensino === 'fundamental') {
+            seriesLocal.map((serie) => {
+            if (serie.includes('6') || serie.includes('7') || serie.includes('8') || serie.includes('9')) {
+                seriesList.push(serie);
+            }
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+    /*setSeries(seriesList);
+    setDatas(Array.from({ length: seriesList.length }, (_, i) => i + 1 * 2));*/
+    const dados = await consultarDadosDaSerie(seriesList);
+}
+
+const consultarDadosDaSerie = async (seriesList) => {
+    var dados = {};
+    var seriesOrdenadas = {};
+    var datasList = [];
+    var seriesText = [];
+    try {
+      const resposta = await Promise.all(seriesList.map( async (serie) => {
+        const { datasGet, plataformsGet } = await getDataSerie(serie); // Retorna um { OBJETO }
+        dados[serie] = await datasGet;
+        return true;
+      }));
+
+      if (resposta) {
+        await Promise.all(Object.keys(dados).map( async (serie) => {
+          let soma = 0;
+          const  datasGet = dados[serie];
+          Object.values(datasGet).map((val) => {
+            soma += Number(val);
+          })
+          const media = (soma / Object.values(datasGet).length);
+          seriesOrdenadas[serie] = media;
+          datasList.push(media);
+        }));
+
+        await datasList.sort();
+        
+        let arraySeriesOrdenadasDescrecente = await Object.entries(seriesOrdenadas);
+        await localStorage.setItem('ranking', JSON.stringify(arraySeriesOrdenadasDescrecente));
+        await arraySeriesOrdenadasDescrecente.sort((a, b) => b[1] - a[1]);
+        
+        let seriesOrdenadasDescrecente = await Object.fromEntries(arraySeriesOrdenadasDescrecente);
+
+        await Object.keys(seriesOrdenadasDescrecente).map( async (serie) => {
+          const valorSerie = seriesOrdenadas[serie]; 
+          if (valorSerie === datasList[datasList.length - 1]) {
+            localStorage.setItem('vencedor', serie);
+          }
+          seriesText.push(serie);
+        });
+
+        await seriesText.reverse();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+}
+
+
+export { getColorsPlataforms, getDataSerie, getSeries, getLastUpdate, setRankingEnsino }

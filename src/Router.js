@@ -46,6 +46,7 @@ const RouterApp = () => {
         return { plataformsArray, colorsArray };
     }
   
+    const ultimaAtualizacaoLocal = localStorage.getItem('ultimaAtualizacao') || false;
     const seriesLocal = localStorage.getItem('series') ? JSON.parse(localStorage.getItem('plataforms')) : null;
     const plataformsLocal = localStorage.getItem('plataforms') ? JSON.parse(localStorage.getItem('plataforms')) : false;
     const colorsLocal = localStorage.getItem('colors') ? JSON.parse(localStorage.getItem('colors')) : false;
@@ -69,7 +70,7 @@ const RouterApp = () => {
             return true;
         };
 
-        if (!plataformsLocal || !colorsLocal || !seriesLocal) {
+        if (!plataformsLocal || !colorsLocal || !seriesLocal || !ultimaAtualizacaoLocal) {
             getData();
         }
     }, []);

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
-import { getColorsPlataforms, getDataSerie } from '../firebase/data';
+import { getColorsPlataforms, getDataSerie, setRankingEnsino } from '../firebase/data';
 
-const BarChart = ({serie}) => {
-
+const BarChart = (props) => {
+  const { serie, ensino } = props;
   const chartRef = useRef(null);
   const myChartRef = useRef(null);
 

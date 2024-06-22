@@ -3,6 +3,7 @@ import BarChart from '../charts/BarChart';
 import Confetti from '../charts/Confetti';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { setRankingEnsino } from '../firebase/data';
 
 const Bar = () => {
 
@@ -51,7 +52,6 @@ const Bar = () => {
   }, [statusSlide, ensino]);
 
   const [rankingSerie, setRankingSerie] = useState(0);
-
   useEffect(() => {
     const ranking = JSON.parse(localStorage.getItem('ranking')) || null;
     if (ranking) {
@@ -64,9 +64,27 @@ const Bar = () => {
     }
   }, [statusSlide, ensino, serie]);
 
+  // Ranking
+  useEffect(() => {
+    const setarRanking = async () => {
+      await setRankingEnsino(ensino);  
+      const ranking = await JSON.parse(localStorage.getItem('ranking')) || null;
+      if (ranking) {
+        ranking.sort((a, b) => b[1] - a[1]);
+        ranking.map((rankin, index) => {
+          if (rankin[0] === serie) {
+            setRankingSerie(index + 1);
+          }
+        })
+      }
+    }
+    setarRanking();
+  }, [ensino]);
+  
+  // Busca pela URL
   const location = useLocation();
   
-   useEffect(() => {
+  useEffect(() => {
     const params = new URLSearchParams(location.search);
     const ensinoParam = params.get('e');
 
@@ -133,7 +151,7 @@ const Bar = () => {
         ) : (
           <></>
         )}
-        <BarChart key={serie} serie={serie} />
+        <BarChart key={serie} serie={serie} ensino={ensino} />
         {vencedor === serie ? (
           <Confetti />
         ) : (
